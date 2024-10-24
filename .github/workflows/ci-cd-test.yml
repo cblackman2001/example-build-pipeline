@@ -2,12 +2,6 @@ name: Example Build Pipeline - No Sonar
 
 on:
   workflow_dispatch:
-    inputs:
-      compress_repo:
-        description: 'Compress and upload the repository as an artifact'
-        required: false
-        default: 'false'
-        type: boolean 
 
 jobs:
   build:
@@ -34,12 +28,11 @@ jobs:
         run: npm run lint
 
       - name: Compress and upload repository
-      #  if: ${{ inputs.compress_repo == 'true' }}  
         run: |
           zip -r compressed-src.zip src
+          
       - name: Upload compressed artifact
-      #  if: ${{ inputs.compress_repo == 'true' }} 
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: compressed-src
           path: compressed-src.zip
