@@ -36,10 +36,10 @@ jobs:
       - name: Compress and upload repository
         if: ${{ inputs.compress_repo == 'true' }}  
         run: |
-          zip -r compressed-repo.zip *
+          zip -r compressed-src.zip src
       - name: Upload compressed artifact
         if: ${{ inputs.compress_repo == 'true' }} 
         uses: actions/upload-artifact@v3
         with:
-          name: compressed-repo
-          path: compressed-repo.zip
+          name: compressed-src
+          path: compressed-src.zip
