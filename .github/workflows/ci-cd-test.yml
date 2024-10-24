@@ -1,0 +1,45 @@
+name: Example Build Pipeline - No Sonar
+
+on:
+  workflow_dispatch:
+    inputs:
+      compress_repo:
+        description: 'Compress and upload the repository as an artifact'
+        required: false
+        default: 'false'
+        type: boolean 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Lint the code
+        run: npm run lint
+
+      - name: Compress and upload repository
+        if: ${{ inputs.compress_repo == 'true' }}  
+        run: |
+          zip -r compressed-repo.zip .
+      - name: Upload compressed artifact
+        if: ${{ inputs.compress_repo == 'true' }} 
+        uses: actions/upload-artifact@v2
+        with:
+          name: compressed-repo
+          path: compressed-repo.zip
