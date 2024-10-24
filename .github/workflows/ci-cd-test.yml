@@ -39,7 +39,7 @@ jobs:
           zip -r compressed-repo.zip .
       - name: Upload compressed artifact
         if: ${{ inputs.compress_repo == 'true' }} 
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: compressed-repo
           path: compressed-repo.zip
