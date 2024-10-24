@@ -1,0 +1,16 @@
+{
+  "name": "ci-cd-test",
+  "version": "1.0.0",
+  "description": "A basic Node.js app to test CI/CD pipelines",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "echo 'Building project...'",
+    "test": "jest",
+    "lint": "eslint src/app.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.0",
+    "eslint": "^7.0.0"
+  }
+}
